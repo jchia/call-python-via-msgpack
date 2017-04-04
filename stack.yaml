@@ -1,4 +1,4 @@
-resolver: lts-7.14
+resolver: lts-8.5
 
 packages:
 - '.'
@@ -7,5 +7,3 @@ packages:
     commit: 669dbcfbf02e658440de945eb2e3fb26a2505845
   extra-dep: true
 
-extra-deps:
-  - data-msgpack-0.0.9
