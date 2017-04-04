@@ -33,14 +33,13 @@ main = do
 
   E.handle onPyExceptionPrint $ do
 
-    pythonpath <- Py.getPath
-    T.putStrLn ("Python path at startup is: " <> pythonpath <> "\n")
-    -- Appending so that the user's PYTHONPATH variable (ready by python) can go first.
-    let updatedPytonpath = pythonpath <> ":/usr/lib/python2.7/dist-packages:."
-    T.putStrLn ("Setting Python path to: " <> updatedPytonpath <> "\n")
-    Py.setPath updatedPytonpath
+    pythonPath <- Py.getPath
+    T.putStrLn ("Python path at startup is: " <> pythonPath <> "\n")
+    let updatedPath = pythonPath <> ":/usr/lib64/python2.7/site-packages:/usr/lib/python2.7/dist-packages:."
+    T.putStrLn ("Setting system path to: " <> updatedPath <> "\n")
+    Py.setPath updatedPath
 
-    examplemodule <- Py.importModule "examplemodule27"
+    examplemodule <- Py.importModule "a.b.examplemodule27"
     f1 <- Py.getAttribute examplemodule =<< Py.toUnicode "f1"
     res <- Py.callArgs f1 []
 
@@ -55,7 +54,7 @@ main = do
     -- Explicit interface
 
     resMsgpack <- callViaSerialization
-      "examplemodule27"
+      "a.b.examplemodule27"
       "f2"
       (encode ("hello" :: String, "world" :: ByteString))
       (encode (M.ObjectMap [ (M.toObject ("stringKey" :: Text), M.toObject ("value" :: ByteString))
@@ -68,7 +67,7 @@ main = do
 
     putStrLn ""
 
-    let f2 = callViaSerializationPretty "examplemodule27" "f2"
+    let f2 = callViaSerializationPretty "a.b.examplemodule27" "f2"
 
     res <- f2 ("hello" :: String, "world" :: ByteString)
       [ "stringKey" =: ("value" :: ByteString)
