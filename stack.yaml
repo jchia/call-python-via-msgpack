@@ -1,9 +1,8 @@
-resolver: lts-8.5
+resolver: lts-14.20
 
 packages:
 - '.'
-- location:
-    git: https://github.com/nh2/haskell-cpython.git
-    commit: 669dbcfbf02e658440de945eb2e3fb26a2505845
-  extra-dep: true
 
+extra-deps:
+- git: https://github.com/nh2/haskell-cpython.git
+  commit: 669dbcfbf02e658440de945eb2e3fb26a2505845
