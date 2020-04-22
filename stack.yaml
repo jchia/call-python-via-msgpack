@@ -1,8 +1,10 @@
-resolver: lts-14.20
+resolver: lts-15.9
 
 packages:
 - '.'
 
 extra-deps:
+- data-msgpack-0.0.13
+- data-msgpack-types-0.0.3
 - git: https://github.com/nh2/haskell-cpython.git
   commit: 669dbcfbf02e658440de945eb2e3fb26a2505845
